@@ -1,10 +1,7 @@
 import { DataSource } from 'typeorm';
-import { config } from 'dotenv';
-import path from 'path';
+import * as dotenv from 'dotenv';
 
-config({
-  path: path.resolve(process.cwd(), '.env'),
-});
+dotenv.config();
 
 export default new DataSource({
   type: 'postgres',
@@ -16,5 +13,7 @@ export default new DataSource({
   entities: ['src/**/*.entity.ts'],
   synchronize: false,
   migrations: ['src/database/migrations/*.ts'],
-  // ssl: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });

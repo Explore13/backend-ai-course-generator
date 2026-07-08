@@ -7,29 +7,33 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Role } from '../../common/enums/role.enum';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ unique: true, nullable: false, type: 'uuid' })
+  @Column({ unique: true, nullable: false, type: 'varchar' })
   clerk_id!: string;
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'varchar' })
   first_name!: string;
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'varchar' })
   last_name!: string;
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'varchar' })
   image_url!: string;
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'varchar' })
   email!: string;
 
-  @Column({ nullable: true, type: 'string' })
+  @Column({ nullable: true, type: 'varchar' })
   phone_number!: string;
+
+  @Column({ type: 'enum', enum: Role, nullable: false, default: Role.User })
+  role!: Role;
 
   @CreateDateColumn()
   createdAt!: Date;
