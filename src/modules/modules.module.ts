@@ -5,4 +5,4 @@ import { UserModule } from './user/user.module';
 @Module({
   imports: [AuthModule, UserModule],
 })
-export class ModulesModule {}
+export class ModulesModule { }
