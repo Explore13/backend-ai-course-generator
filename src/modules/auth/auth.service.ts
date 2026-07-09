@@ -15,8 +15,6 @@ export class AuthService {
 
     async handleWebhook(req: RawBodyRequest<Request>) {
         const event = this.verifyWebhook(req)
-        console.log(event);
-
         if (!event) throw new BadRequestException("Invalid webhook")
 
         switch (event.type) {
