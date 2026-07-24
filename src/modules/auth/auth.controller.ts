@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/webhook/clerk')
   async handleWebhook(@Req() req: RawBodyRequest<Request>) {
@@ -12,6 +12,6 @@ export class AuthController {
 
     // console.log(` Size : ${sizeInKB} KB`);
 
-    return this.authService.handleWebhook(req)
+    return this.authService.handleWebhook(req);
   }
 }

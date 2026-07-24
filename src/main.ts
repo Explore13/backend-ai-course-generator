@@ -16,7 +16,9 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/exceptions/http.exception';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, { rawBody: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    rawBody: true,
+  });
 
   // Enable CORS for frontend
   app.enableCors({
@@ -85,8 +87,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);
 
-  await app.listen(process.env.PORT ?? 3000, () => {
-    console.log(`Server is running on port ${process.env.PORT ?? 3000}`);
+  await app.listen(process.env.PORT ?? 8000, () => {
+    console.log(`Server is running on port ${process.env.PORT ?? 8000}`);
   });
 }
 bootstrap().catch((err) => {

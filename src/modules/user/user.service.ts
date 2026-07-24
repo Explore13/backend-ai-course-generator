@@ -8,7 +8,9 @@ import { Role } from '../../common/enums/role.enum';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) { }
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
   // user create
   async createUser(createUserDto: CreateUserDto) {
     const newUser = this.userRepository.create(createUserDto);
@@ -17,15 +19,22 @@ export class UserService {
 
   // user update
   async updateUser(clerk_id: string, updateUserDto: UpdateUserDto) {
-    const existingUser = await this.getUser(clerk_id)
+    const existingUser = await this.getUser(clerk_id);
     if (updateUserDto?.clerk_id && updateUserDto.clerk_id !== clerk_id) {
-      throw new BadRequestException("You cannot update clerk_id");
+      throw new BadRequestException('You cannot update clerk_id');
     }
-    if (existingUser.role !== Role.Admin && updateUserDto?.role && updateUserDto.role !== existingUser.role) {
-      throw new BadRequestException("You cannot update role");
+    if (
+      existingUser.role !== Role.Admin &&
+      updateUserDto?.role &&
+      updateUserDto.role !== existingUser.role
+    ) {
+      throw new BadRequestException('You cannot update role');
     }
 
-    const updatedUser = await this.userRepository.save({ ...existingUser, ...updateUserDto });
+    const updatedUser = await this.userRepository.save({
+      ...existingUser,
+      ...updateUserDto,
+    });
     return updatedUser;
   }
 
@@ -33,14 +42,14 @@ export class UserService {
   async getUser(clerk_id: string) {
     const user = await this.userRepository.findOneBy({ clerk_id });
     if (!user) {
-      throw new BadRequestException("user not found");
+      throw new BadRequestException('user not found');
     }
     return user;
   }
 
   // delete user
   async deleteUser(clerk_id: string) {
-    const existingUser = await this.getUser(clerk_id)
+    const existingUser = await this.getUser(clerk_id);
 
     await this.userRepository.softRemove(existingUser);
     return {
