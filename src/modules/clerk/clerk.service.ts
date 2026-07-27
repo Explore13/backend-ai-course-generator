@@ -37,7 +37,7 @@ export class ClerkService {
   constructor(
     @Inject('CLERK_CLIENT')
     private readonly clerk: ClerkClient,
-  ) {}
+  ) { }
 
   // ---------------------------------------------------------------------
   // DELETE ALL USERS (HARD DELETE) - non-production only
@@ -106,7 +106,7 @@ export class ClerkService {
       'src',
       'database',
       'migrations',
-      'failed.csv',
+      'users.csv',
     );
 
     if (!fs.existsSync(csvPath)) {

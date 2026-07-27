@@ -1,13 +1,13 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUserTable10000000 implements MigrationInterface {
-  name = 'CreateUserTable1783507711947';
+export class CreateUserTable1000000000000 implements MigrationInterface {
+  name = 'CreateUserTable1000000000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
     await queryRunner.createTable(
       new Table({
-        name: 'user',
+        name: 'users',
         columns: [
           {
             name: 'id',
@@ -76,7 +76,7 @@ export class CreateUserTable10000000 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user');
+    await queryRunner.dropTable('users');
     await queryRunner.query(`DROP TYPE IF EXISTS "public"."user_role_enum"`);
   }
 }
